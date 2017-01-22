@@ -7,22 +7,151 @@
 //
 
 #import "ViewController.h"
+#import <MultipeerConnectivity/MultipeerConnectivity.h>
 
-@interface ViewController ()
+NSString * const KPServiceType = @"KPServiceType";
+
+
+@interface ViewController () <MCBrowserViewControllerDelegate, MCSessionDelegate>
+{
+    MCPeerID  *_myPeerID;
+    MCSession *_mySession;
+    
+    MCBrowserViewController *_browserViewController;
+    MCAdvertiserAssistant   *_advertiser;
+}
+
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    _myPeerID = [[MCPeerID alloc] initWithDisplayName:[UIDevice currentDevice].name];
+    
+    _mySession = [[MCSession alloc] initWithPeer:_myPeerID
+                                securityIdentity:nil
+                            encryptionPreference:MCEncryptionNone];
+    
+    _mySession.delegate = self;
+    
+    _browserViewController = [[MCBrowserViewController alloc] initWithServiceType:KPServiceType
+                                                                          session:_mySession];
+    
+    _browserViewController.delegate = self;
+    
+    
+    _advertiser = [[MCAdvertiserAssistant alloc] initWithServiceType:KPServiceType
+                                                       discoveryInfo:nil
+                                                             session:_mySession];
+    
+    [_advertiser start];
+    
+    [self showBrowserViewController];
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)showBrowserViewController
+{
+    [self presentViewController:_browserViewController
+                       animated:YES
+                     completion:nil];
+//     {
+//         NSLog(@"BrowserViewController showed");
+//     }];
+}
+
+
+
+#pragma mark - MCBrowserViewControllerDelegate -
+
+- (void)browserViewControllerDidFinish:(MCBrowserViewController *)browserViewController
+{
+    [browserViewController dismissViewControllerAnimated:YES
+                                              completion:^
+     {
+         NSLog(@"browserViewControllerDidFinish");
+     }];
+}
+
+
+- (void)browserViewControllerWasCancelled:(MCBrowserViewController *)browserViewController
+{
+    [browserViewController dismissViewControllerAnimated:YES
+                                              completion:^
+     {
+         NSLog(@"browserViewControllerWasCancelled");
+     }];
+}
+
+
+
+
+#pragma mark - MCSessionDelegate -
+
+// Remote peer changed state.
+- (void)session:(MCSession *)session
+           peer:(MCPeerID *)peerID
+ didChangeState:(MCSessionState)state
+{
+    switch (state)
+    {
+        case MCSessionStateConnecting:
+            NSLog(@"connecting");
+            break;
+            
+        case MCSessionStateConnected:
+            NSLog(@"connected");
+            break;
+            
+        case MCSessionStateNotConnected:
+            NSLog(@"NotConnected");
+            break;
+            
+        default:
+            break;
+    }
+}
+
+// Received data from remote peer.
+- (void)session:(MCSession *)session
+ didReceiveData:(NSData *)data
+       fromPeer:(MCPeerID *)peerID
+{
+    
+}
+
+// Received a byte stream from remote peer.
+- (void)    session:(MCSession *)session
+   didReceiveStream:(NSInputStream *)stream
+           withName:(NSString *)streamName
+           fromPeer:(MCPeerID *)peerID
+{
+    
+}
+
+// Start receiving a resource from remote peer.
+- (void)                    session:(MCSession *)session
+  didStartReceivingResourceWithName:(NSString *)resourceName
+                           fromPeer:(MCPeerID *)peerID
+                       withProgress:(NSProgress *)progress
+{
+
+}
+
+// Finished receiving a resource from remote peer and saved the content
+// in a temporary location - the app is responsible for moving the file
+// to a permanent location within its sandbox.
+- (void)                    session:(MCSession *)session
+ didFinishReceivingResourceWithName:(NSString *)resourceName
+                           fromPeer:(MCPeerID *)peerID
+                              atURL:(NSURL *)localURL
+                          withError:(nullable NSError *)error
+{
+    
 }
 
 

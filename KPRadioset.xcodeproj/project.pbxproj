@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		8E3193D61E32A6F300696508 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3193D51E32A6F300696508 /* main.m */; };
 		8E3193D91E32A6F300696508 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3193D81E32A6F300696508 /* AppDelegate.m */; };
-		8E3193DC1E32A6F300696508 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3193DB1E32A6F300696508 /* ViewController.m */; };
 		8E3193DF1E32A6F300696508 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E3193DD1E32A6F300696508 /* Main.storyboard */; };
 		8E3193E11E32A6F300696508 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E3193E01E32A6F300696508 /* Assets.xcassets */; };
 		8E3193E41E32A6F300696508 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E3193E21E32A6F300696508 /* LaunchScreen.storyboard */; };
 		8E3193ED1E32A7FF00696508 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3193EC1E32A7FF00696508 /* AudioToolbox.framework */; };
 		8E3193EF1E32A80600696508 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3193EE1E32A80600696508 /* MultipeerConnectivity.framework */; };
+		8E64D8481E353685008ACF90 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E64D8471E353685008ACF90 /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,14 +22,14 @@
 		8E3193D51E32A6F300696508 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8E3193D71E32A6F300696508 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8E3193D81E32A6F300696508 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8E3193DA1E32A6F300696508 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8E3193DB1E32A6F300696508 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8E3193DE1E32A6F300696508 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8E3193E01E32A6F300696508 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E3193E31E32A6F300696508 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E3193E51E32A6F300696508 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E3193EC1E32A7FF00696508 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		8E3193EE1E32A80600696508 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		8E64D8461E353685008ACF90 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8E64D8471E353685008ACF90 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,14 +65,10 @@
 		8E3193D31E32A6F300696508 /* KPRadioset */ = {
 			isa = PBXGroup;
 			children = (
+				8E64D8461E353685008ACF90 /* ViewController.h */,
+				8E64D8471E353685008ACF90 /* ViewController.m */,
 				8E3193D71E32A6F300696508 /* AppDelegate.h */,
 				8E3193D81E32A6F300696508 /* AppDelegate.m */,
-				8E3193DA1E32A6F300696508 /* ViewController.h */,
-				8E3193DB1E32A6F300696508 /* ViewController.m */,
-				8E3193DD1E32A6F300696508 /* Main.storyboard */,
-				8E3193E01E32A6F300696508 /* Assets.xcassets */,
-				8E3193E21E32A6F300696508 /* LaunchScreen.storyboard */,
-				8E3193E51E32A6F300696508 /* Info.plist */,
 				8E3193D41E32A6F300696508 /* Supporting Files */,
 			);
 			path = KPRadioset;
@@ -81,6 +77,10 @@
 		8E3193D41E32A6F300696508 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8E3193DD1E32A6F300696508 /* Main.storyboard */,
+				8E3193E01E32A6F300696508 /* Assets.xcassets */,
+				8E3193E21E32A6F300696508 /* LaunchScreen.storyboard */,
+				8E3193E51E32A6F300696508 /* Info.plist */,
 				8E3193D51E32A6F300696508 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -167,7 +167,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E3193DC1E32A6F300696508 /* ViewController.m in Sources */,
+				8E64D8481E353685008ACF90 /* ViewController.m in Sources */,
 				8E3193D91E32A6F300696508 /* AppDelegate.m in Sources */,
 				8E3193D61E32A6F300696508 /* main.m in Sources */,
 			);
@@ -328,6 +328,7 @@
 				8E3193EA1E32A6F300696508 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
