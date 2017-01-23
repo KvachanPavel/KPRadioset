@@ -49,6 +49,12 @@ NSString * const KPServiceType = @"KPServiceType";
                                                              session:_mySession];
     
     [_advertiser start];
+}
+
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
     [self showBrowserViewController];
 }
@@ -56,12 +62,12 @@ NSString * const KPServiceType = @"KPServiceType";
 
 - (void)showBrowserViewController
 {
-    [self presentViewController:_browserViewController
-                       animated:YES
-                     completion:nil];
-//     {
-//         NSLog(@"BrowserViewController showed");
-//     }];
+    if (_browserViewController != nil)
+    {
+        [self presentViewController:_browserViewController
+                           animated:YES
+                         completion:nil];
+    }
 }
 
 
