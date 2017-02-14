@@ -18,7 +18,7 @@ typedef struct KPAudioQueueCallbackStruct
     AudioQueueRef queue;
     AudioQueueBufferRef mBuffers[AUDIO_BUFFERS];
     AudioFileID outputFile;
-    unsigned long frameSize;
+    unsigned int frameSize;
     long long recPtr;
     int run;
     AudioQueueLevelMeterState *chanelLevels;
@@ -95,21 +95,6 @@ static void AQInputCallback(void *aqr,
 
 @synthesize delegate = _delegate;
 
-- (instancetype)init
-{
-    self = [super init];
-    
-    if (self != nil)
-    {
-        
-    }
-    
-    
-    return self;
-
-}
-
-
 - (void)dealloc
 {
     if (_audioQueueCallback.chanelLevels)
@@ -119,7 +104,6 @@ static void AQInputCallback(void *aqr,
     
     [super dealloc];
 }
-
 
 - (BOOL)start
 {
@@ -156,29 +140,33 @@ static void AQInputCallback(void *aqr,
                                                           [self.fileName length],
                                                           false);
     
-    AudioFileCreateWithURL(fn, fileFormat, &aqc.mDataFormat, kAudioFileFlags_EraseFile, &aqc.outputFile);
+    AudioFileCreateWithURL(fn, fileFormat, &_audioQueueCallback.dataFormat, kAudioFileFlags_EraseFile, &_audioQueueCallback.outputFile);
     
-    for (int i=0; i<AUDIO_BUFFERS; i++)
+    for (int i = 0; i < AUDIO_BUFFERS; i++)
     {
-        AudioQueueAllocateBuffer(aqc.queue, aqc.frameSize, &aqc.mBuffers[i]);
-        AudioQueueEnqueueBuffer(aqc.queue, aqc.mBuffers[i], 0, NULL);
+        AudioQueueAllocateBuffer(_audioQueueCallback.queue, _audioQueueCallback.frameSize, &_audioQueueCallback.mBuffers[i]);
+        AudioQueueEnqueueBuffer(_audioQueueCallback.queue, _audioQueueCallback.mBuffers[i], 0, NULL);
     }
     
-    aqc.recPtr = 0;
-    aqc.run = 1;
+    _audioQueueCallback.recPtr = 0;
+    _audioQueueCallback.run = 1;
     
-    AudioQueueStart(aqc.queue, NULL);
+    AudioQueueStart(_audioQueueCallback.queue, NULL);
     
-    recording = YES;
+    _recording = YES;
     
     return YES;
 
 }
 
-
 - (void)stop
 {
-    NSLog(@"stop recording");
+    AudioQueueStop(_audioQueueCallback.queue, true);
+    _audioQueueCallback.run = 0;
+    
+    AudioQueueDispose(_audioQueueCallback.queue, true);
+    AudioFileClose(_audioQueueCallback.outputFile);
+    _recording = NO;
 }
 
 
