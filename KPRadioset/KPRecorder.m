@@ -173,14 +173,10 @@ static void AQInputCallback(void *aqr,
 - (NSString *)fileName
 {
     NSString *pathDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
     NSString *rv = [pathDir stringByAppendingPathComponent:
-                    [NSString stringWithFormat:@"%@.aiff", [dateFormatter stringFromDate:[NSDate date]]]
+                    [NSString stringWithFormat:@"1.aiff"]
                     ];
-    
+    NSLog(@"%@", rv);
     return rv;
 }
 
